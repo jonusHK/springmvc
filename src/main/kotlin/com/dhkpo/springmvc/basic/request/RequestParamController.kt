@@ -1,9 +1,11 @@
 package com.dhkpo.springmvc.basic.request
 
+import com.dhkpo.springmvc.basic.HelloData
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
 import org.slf4j.LoggerFactory
 import org.springframework.stereotype.Controller
+import org.springframework.web.bind.annotation.ModelAttribute
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.ResponseBody
@@ -76,6 +78,24 @@ class RequestParamController {
     @RequestMapping("/request-param-map")
     fun requestParamMap(@RequestParam paramMap: Map<String, Any>): String {
         log.info("username={}, age={}", paramMap["username"], paramMap["age"])
+        return "ok"
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v1")
+    fun modelAttributeV1(@ModelAttribute data: HelloData): String {
+        log.info("username={}, age={}", data.username, data.age)
+        log.info(data.toString())
+
+        return "ok"
+    }
+
+    @ResponseBody
+    @RequestMapping("/model-attribute-v2")
+    fun modelAttributeV2(data: HelloData): String {
+        log.info("username={}, age={}", data.username, data.age)
+        log.info(data.toString())
+
         return "ok"
     }
 }
